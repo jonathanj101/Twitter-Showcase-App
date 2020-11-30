@@ -24,7 +24,32 @@
   height: 100%;
 }
 
+/* .nav-link {
+  color: rgba(255, 255, 255, 0.5);
+  border-radius: 0.25rem;
+  font-size: 2rem;
+  display: block;
+  padding: 0.5rem 1rem;
+} */
+
+/* .nav-link:active {
+  background-color: aquamarine;
+} */
+
 .stick {
   width: 25%;
   height: 25%;
+}
+
+.toast {
+  max-width: 75%;
+}
+
+.toast-header strong,
+.toast-body {
+  font-size: 1.5rem;
+}
+
+i:hover {
+  color: rgb(255, 255, 255);
 }
