@@ -1,21 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import NavbarComponent from '../components/NavbarComponent'
 import Footer from '../components/Footer'
 import Home from '../pages/Home'
 import SearchComponent from './Search'
 
-const Main = () => {
-    return (
-        <div>
-            <NavbarComponent />
-            <Switch >
-                <Route path="/" exact component={() => <Home />} />
-                <Route path='/search' exact component={() => <SearchComponent />} />
-            </Switch>
-            <Footer />
-        </div>
-    )
+class Main extends Component {
+    constructor() {
+        super();
+        this.state = {
+            userText: ''
+        }
+        this.getUserText = this.getUserText.bind(this)
+    }
+
+    getUserText = (text) => {
+        console.log(text)
+    }
+
+    render() {
+        return (
+            <div>
+                <NavbarComponent />
+                <Switch >
+                    <Route path="/" exact component={() => <Home />} />
+                    <Route path='/search' exact component={() => <SearchComponent geUsertText={this.getUserText} />} />
+                </Switch>
+                <Footer />
+            </div >
+        )
+    }
 }
 
 export default Main
