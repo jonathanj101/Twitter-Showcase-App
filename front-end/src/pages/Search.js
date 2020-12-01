@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 
-const SearchComponent = (props) => {
-    console.log(props)
+const SearchComponent = ({ getUserText }) => {
+    // console.log(props)
     const [text, getText] = useState('')
+
+    function clearState() {
+        getText("")
+    }
 
     function getValueInput(e) {
         const { value } = e.target
@@ -21,8 +25,11 @@ const SearchComponent = (props) => {
                     placeholder="Search for a user tweet..." />
                 <div className="input-group-append">
                     <button
-                        onClick={() => props.getUserText(text)}
-                        className="btn btn-outline-secondary bg-dark text-light" type="button">
+                        onClick={() => {
+                            getUserText(text)
+                            clearState()
+                        }}
+                        className="btn btn-outline-secondary bg-primary text-light" type="button">
                         Search
                     </button>
                 </div>
