@@ -24,7 +24,7 @@ class Main extends Component {
                 <NavbarComponent />
                 <Switch >
                     <Route path="/" exact component={() => <Home />} />
-                    <Route path='/search' exact component={() => <SearchComponent geUsertText={this.getUserText} />} />
+                    <Route path='/search' exact component={() => <SearchComponent getUserText={this.getUserText} />} />
                 </Switch>
                 <Footer />
             </div >
