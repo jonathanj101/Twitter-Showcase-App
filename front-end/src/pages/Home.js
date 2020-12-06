@@ -5,8 +5,8 @@ import fishingTweets from '../images/fishing-tweet.jpg'
 
 const Home = () => {
     return (
-        <div className='bg-dark'>
-            <div className="container">
+        <div className='bg-secondary'>
+            <div className="container h-50">
                 <Toast className='mx-auto'>
                     <Toast.Header>
                         <img src={fishingTweets} className="stick rounded mr-2" alt="" />

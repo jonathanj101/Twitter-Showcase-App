@@ -1,9 +1,6 @@
 import './App.css';
 import { BrowserRouter } from 'react-router-dom'
-
-
-
-import Main from './pages/Main'
+import Main from './components/Main'
 
 function App() {
   return (
