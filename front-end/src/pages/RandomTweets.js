@@ -3,7 +3,9 @@ import idk from '../images/red-blue-tweet.jpg'
 
 const RandomTweetsComponent = () => {
     return (
-        <div className="h-100 w-100">
+        <div
+            className="bg-secondary"
+            style={divHeight}>
 
             <div className="card-group">
                 <div className="card" >
@@ -33,6 +35,10 @@ const RandomTweetsComponent = () => {
             </div>
         </div>
     )
+}
+var divHeight = {
+    height: '75.25vh',
+    minHeight: '75.25vh'
 }
 
 export default RandomTweetsComponent
