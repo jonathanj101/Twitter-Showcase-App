@@ -15,7 +15,9 @@ const SearchComponent = ({ getUserText }) => {
     }
 
     return (
-        <div className="bg-dark">
+        <div
+            className="bg-secondary"
+            style={divHeight}>
             <div className="input-group mx-auto w-50">
                 <input
                     className="form-control"
@@ -36,6 +38,11 @@ const SearchComponent = ({ getUserText }) => {
             </div>
         </div>
     )
+}
+
+var divHeight = {
+    height: '75.25vh',
+    minHeight: '75.25vh'
 }
 
 export default SearchComponent
