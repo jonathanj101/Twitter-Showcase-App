@@ -5,9 +5,11 @@ import fishingTweets from '../images/fishing-tweet.jpg'
 
 const Home = () => {
     return (
-        <div className='bg-secondary'>
-            <div className="container h-50">
-                <Toast className='mx-auto'>
+        <div
+            className='bg-secondary'
+            style={divHeight}>
+            <div className="container pt-2">
+                <Toast className='mx-auto' style={toastPadding}>
                     <Toast.Header>
                         <img src={fishingTweets} className="stick rounded mr-2" alt="" />
                         <strong className="mr-auto">Fishing Tweets!</strong>
@@ -29,5 +31,14 @@ const Home = () => {
         </div>
     )
 }
+var divHeight = {
+    height: '75.25vh',
+    minHeight: '75.25vh'
+}
+
+var toastPadding = {
+    margin: '10% auto',
+}
+
 
 export default Home
