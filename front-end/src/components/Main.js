@@ -21,7 +21,7 @@ class Main extends Component {
 
     render() {
         return (
-            <div className='main h-100'>
+            <div className='main'>
                 <NavbarComponent />
                 <Switch >
                     <Route path="/" exact component={() => <Home />} />
@@ -33,5 +33,4 @@ class Main extends Component {
         )
     }
 }
-
 export default Main
