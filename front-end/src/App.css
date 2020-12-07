@@ -1,7 +1,9 @@
-.footer {
-  height: 100%;
-  min-height: 50vh;
-}
+/* html,
+body,
+.App,
+.App > div {
+  height: 100vh !important;
+} */
 
 .nav-link {
   font-size: 2rem;
