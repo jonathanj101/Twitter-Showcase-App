@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Toast } from 'react-bootstrap'
 // import stickManFishing from '../images/stickman-fishing.jpg'
 import fishingTweets from '../images/fishing-tweet.jpg'
 
 const Home = () => {
+    const [initialData, setInitialData] = useState([{}])
+
+    useEffect(() => {
+        fetch('/').then(res => res.json()
+        ).then(data => console.log(data))
+    })
+
     return (
         <div
             className='bg-secondary'
