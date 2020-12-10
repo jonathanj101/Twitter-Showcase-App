@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Toast } from 'react-bootstrap'
-// import stickManFishing from '../images/stickman-fishing.jpg'
 import fishingTweets from '../images/fishing-tweet.jpg'
 
 const Home = () => {
     const [initialData, setInitialData] = useState([{}])
 
     useEffect(() => {
-        fetch('/').then(res => res.json()
-        ).then(data => console.log(data))
-    })
+        axios('/home')
+            .then(response => {
+                setInitialData(response.data)
+            })
+            .catch(err => console.log(err))
+    }, [])
 
     return (
         <div
@@ -28,6 +31,8 @@ const Home = () => {
                         * Click on Search, to search for your favorite person's tweets
                     </Toast.Body>
                     <Toast.Body>
+                        *{initialData.name}
+                        *{initialData.lastName}
                         * Don't know what to look? Click on Random to see selected Twitter's users tweets!
                     </Toast.Body>
                     <Toast.Body>
