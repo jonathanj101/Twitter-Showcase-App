@@ -13,6 +13,7 @@ const Home = () => {
             })
             .catch(err => console.log(err))
     }, [])
+    console.log(initialData)
 
     return (
         <div
@@ -31,12 +32,10 @@ const Home = () => {
                         * Click on Search, to search for your favorite person's tweets
                     </Toast.Body>
                     <Toast.Body>
-                        *{initialData.name}
-                        *{initialData.lastName}
                         * Don't know what to look? Click on Random to see selected Twitter's users tweets!
                     </Toast.Body>
                     <Toast.Body>
-                        * Have Fun!
+                        * Have fun
                     </Toast.Body>
                 </Toast>
             </div>
