@@ -2,7 +2,7 @@ from flask import Flask
 import json
 import tweepy
 
-f = open('../twitter-cred.json',)
+f = open('../twitter-creds.json')
 data = json.load(f)
 
 # print(data.get("CONSUMER_KEY"))
