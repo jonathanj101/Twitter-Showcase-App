@@ -57,3 +57,10 @@ def index():
     print(new_user)
 # return jsonify(new_user)
     return jsonify(new_user)
+
+
+@app.route('/search/:<name>', methods=['GET'])
+def maybe(name):
+    print(name)
+
+    return '{name}'.format(name)
