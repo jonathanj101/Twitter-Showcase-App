@@ -31,23 +31,23 @@ const Home = () => {
                         <strong className="mr-auto">Fishing Tweets!</strong>
                         <Button onClick={toggleShowA}>Click Me</Button>
                     </Toast.Header>
-                </Toast>
-                <Toast
-                    className="mx-auto"
-                    onClose={toggleShowA}
-                    show={showA}>
-                    <Toast.Body >
-                        * This application uses Twitter API to search desired user's tweets
+                    <Toast
+                        className="mx-auto w-100"
+                        onClose={toggleShowA}
+                        show={showA}>
+                        <Toast.Body >
+                            * This application uses Twitter API to search desired user's tweets
                     </Toast.Body>
-                    <Toast.Body>
-                        * Click on Search, to search for your favorite person's tweets
+                        <Toast.Body>
+                            * Click on Search, to search for your favorite person's tweets
                     </Toast.Body>
-                    <Toast.Body>
-                        * Don't know what to look? Click on Random to see my selected Twitter's users tweets!
+                        <Toast.Body>
+                            * Don't know what to look? Click on Random to see my selected Twitter's users tweets!
                     </Toast.Body>
-                    <Toast.Body>
-                        * Have fun
+                        <Toast.Body>
+                            * Have fun
                     </Toast.Body>
+                    </Toast>
                 </Toast>
             </div>
         </div>
