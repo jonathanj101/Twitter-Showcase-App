@@ -38,6 +38,10 @@ api = tweepy.API(auth)
 # print(dir(user))
 # print(user.ids)
 # print(user)
+# id = 61994400
+# user1 = api.get_user(id=id)
+# print(dir(user1))
+# print(user1.name)
 
 
 app = Flask(__name__)
@@ -45,17 +49,20 @@ app = Flask(__name__)
 
 @app.route('/home', methods=['GET'])
 def index():
-    user = api.get_user(screen_name='andysterks')
-# new_user = {
-#     "name": user.screen_name,
-#     "followers_count": user.followers_count
-# }
+    user_name = api.get_user(screen_name="andysterks")
+    user_time_line = api.user_timeline(screen_name='andysterks', count=5)
+
+    tweets_list = []
+
+    for tweets in user_time_line:
+        tweets_list.append(tweets.text)
+
     new_user = {
-        "name": user.name,
-        "text": user.description
+        "name": user_name.name,
+        "username": user_name.screen_name,
+        "tweets": tweets_list
     }
-    print(new_user)
-# return jsonify(new_user)
+
     return jsonify(new_user)
 
 
