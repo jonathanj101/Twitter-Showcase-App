@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Toast, Button, Image } from 'react-bootstrap'
 
 const RandomTweetsComponent = () => {
-    const [user, setAndysTweet] = useState()
+    const [user, setUserData] = useState([])
     const [showA, setShowA] = useState(false);
     const [showB, setShowB] = useState(false);
     const [showC, setShowC] = useState(false);
@@ -13,13 +13,12 @@ const RandomTweetsComponent = () => {
     const toggleShowC = () => setShowC(!showC);
 
     useEffect(() => {
-        axios.get('/randomTweets')
-            .then(response => {
-                setAndysTweet(response.data)
+        fetch('/randomtweets')
+            .then(response => response.json()).then(data => {
+                setUserData(data)
             })
-            .catch(err => console.log(err))
     }, [])
-    console.log(user.name.andy)
+    console.log(user)
 
     return (
         <div
@@ -53,11 +52,11 @@ const RandomTweetsComponent = () => {
                     <Toast.Header closeButton={false}>
                         <Image
                             className="stick mr-2"
-                            // src={user.profile_image.gtrs}
+                            // src={user.profile_image}
                             alt="twiiter alike logo"
                             roundedCircle />
-                        {/* <strong className="mr-auto">{user.name.gtr}</strong> */}
-                        {/* <small style={userNameStyle}>@{user.username.gtr}</small> */}
+                        {/* <strong className="mr-auto">{user.name}</strong> */}
+                        {/* <small style={userNameStyle}>@{user.username}</small> */}
                         <Button onClick={toggleShowB}>click me</Button>
                     </Toast.Header>
                     <Toast className="w-100" onClose={toggleShowB} show={showB}>
