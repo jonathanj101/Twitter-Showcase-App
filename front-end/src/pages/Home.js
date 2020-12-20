@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Toast, Button } from 'react-bootstrap'
 import fishingTweets from '../images/fishing-tweet.jpg'
 
