@@ -32,8 +32,8 @@ body,
 }
 
 .stick {
-  width: 25%;
-  height: 25%;
+  width: 20%;
+  height: 20%;
 }
 
 .toast {
@@ -42,11 +42,6 @@ body,
 
 .toast:not(:last-child) {
   margin-bottom: 0;
-}
-
-.toast-header strong,
-.toast-body {
-  font-size: 1.5rem;
 }
 
 i:hover {
