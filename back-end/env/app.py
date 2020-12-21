@@ -5,6 +5,9 @@ from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 load_dotenv()
 
+
+app = Flask(__name__)
+
 consumer_key = os.environ.get('CONSUMER_KEY')
 consumer_token = os.environ.get('CONSUMER_SECRET')
 access_token_key = os.environ.get('ACCESS_TOKEN')
@@ -13,8 +16,6 @@ access_token_key_secret = os.environ.get('ACCESS_TOKEN_SECRET')
 auth = tweepy.OAuthHandler(consumer_key, consumer_token)
 auth.set_access_token(access_token_key, access_token_key_secret)
 api = tweepy.API(auth)
-
-app = Flask(__name__)
 
 
 @app.route('/randomtweets', methods=['GET'])
