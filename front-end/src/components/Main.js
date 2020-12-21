@@ -10,14 +10,41 @@ class Main extends Component {
     constructor() {
         super();
         this.state = {
-            userText: ''
+            userText: '',
+            user: ''
         }
         this.getUserText = this.getUserText.bind(this)
+        // this.fetchData = this.fetchData.bind(this)
     }
 
     getUserText = (text) => {
         console.log(text)
     }
+    componentDidMount() {
+        fetch('/randomtweets')
+            .then(response => response.json())
+            .then(user => {
+                console.log(user)
+                this.setState({
+                    user: user
+                })
+                console.log(this.state.user)
+            })
+    }
+    // fetchData() {
+    //     fetch('/randomtweets')
+    //         .then(response => {
+    //             response.json()
+    //             console.log(response)
+    //         })
+    //         .then(user => {
+    //             console.log(user)
+    //             this.setState({
+    //                 user: user
+    //             })
+    //             console.log(this.state.user)
+    //         })
+    // }
 
     render() {
         return (
@@ -26,7 +53,7 @@ class Main extends Component {
                 <Switch >
                     <Route path="/" exact component={() => <Home />} />
                     <Route path='/search' exact component={() => <SearchComponent getUserText={this.getUserText} />} />
-                    <Route path='/random' exact component={() => <RandomTweetsComponent />} />
+                    <Route path='/random' exact component={() => <RandomTweetsComponent userData={this.state.user} />} />
                 </Switch>
                 <Footer />
             </div >
