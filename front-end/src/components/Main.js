@@ -11,7 +11,7 @@ class Main extends Component {
         super();
         this.state = {
             userText: '',
-            user: ''
+            // user: ''
         }
         this.getUserText = this.getUserText.bind(this)
         // this.fetchData = this.fetchData.bind(this)
@@ -20,17 +20,17 @@ class Main extends Component {
     getUserText = (text) => {
         console.log(text)
     }
-    componentDidMount() {
-        fetch('/randomtweets')
-            .then(response => response.json())
-            .then(user => {
-                console.log(user)
-                this.setState({
-                    user: user
-                })
-                console.log(this.state.user)
-            })
-    }
+    // componentDidMount() {
+    //     fetch('/randomtweets')
+    //         .then(response => response.json())
+    //         .then(user => {
+    //             console.log(user)
+    //             this.setState({
+    //                 user: user
+    //             })
+    //             console.log(this.state.user)
+    //         })
+    // }
     // fetchData() {
     //     fetch('/randomtweets')
     //         .then(response => {
