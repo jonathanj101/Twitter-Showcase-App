@@ -2,24 +2,10 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Toast, Button, Image } from 'react-bootstrap'
 
-const RandomTweetsComponent = ({ usersData }) => {
+const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) => {
     const [fetchAndysTweets, andysTweets] = useState([])
     const [fetchBMWSTweets, bmwsTweets] = useState([])
     const [fetchGTRSTweets, gtrsTweets] = useState([])
-
-    // useEffect(() => {
-    //     fetch('/andy')
-    //         .then(response => response.json())
-    //         .then(tweet => {
-    //             console.log(tweet)
-    //             andysTweets(tweet)
-
-    //         })
-    // }, [])
-
-    // const showAndysTweets = () => {
-
-    // }
 
     const [showAndys, setShowAndys] = useState(false);
     const [showBMWS, setShowBMWS] = useState(false);
