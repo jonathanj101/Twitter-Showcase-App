@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Toast, Button, Image } from 'react-bootstrap'
 
-const RandomTweetsComponent = ({ userData }) => {
-    // const [user, setUserData] = useState([])
+const RandomTweetsComponent = () => {
+    const [user, setUserData] = useState([{ name: '' }])
     const [showA, setShowA] = useState(false);
     const [showB, setShowB] = useState(false);
     const [showC, setShowC] = useState(false);
@@ -12,13 +12,13 @@ const RandomTweetsComponent = ({ userData }) => {
     const toggleShowB = () => setShowB(!showB);
     const toggleShowC = () => setShowC(!showC);
 
-    // useEffect(() => {
-    //     fetch('/randomtweets')
-    //         .then(response => response.json()).then(data => {
-    //             setUserData(data)
-    //         })
-    // }, [])
-    console.log(userData)
+    useEffect(() => {
+        fetch('/randomtweets')
+            .then(response => response.json()).then(data => {
+                setUserData(data)
+            })
+    }, [])
+    console.log(user)
 
     return (
         <div
