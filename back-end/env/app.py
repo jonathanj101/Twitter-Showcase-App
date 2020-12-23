@@ -58,7 +58,7 @@ def andy_request():
     for tweets in andy_get_tweets:
         andys_tweets_list.append(tweets.text)
 
-    return jsonify({"tweets_list": andys_tweets_list})
+    return jsonify({"andys_tweets": andys_tweets_list})
 
 
 @app.route('/bmw', methods=["GET"])
@@ -70,7 +70,7 @@ def bmw_request():
     for tweets in bmw_get_tweets:
         bmws_tweets_list.append(tweets.text)
 
-    return jsonify({"tweets_list": bmws_tweets_list})
+    return jsonify({"bmws_tweets": bmws_tweets_list})
 
 
 @app.route('/gtr', methods=["GET"])
@@ -82,7 +82,7 @@ def gtr_request():
     for tweets in gtr_get_tweets:
         gtrs_tweets_list.append(tweets.text)
 
-    return jsonify({"tweets": gtrs_tweets_list})
+    return jsonify({"gtrs_tweets": gtrs_tweets_list})
 
 
 # @app.route('/search/:<name>', methods=['GET'])
