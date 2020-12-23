@@ -5,7 +5,6 @@ from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 load_dotenv()
 
-
 app = Flask(__name__)
 
 consumer_key = os.environ.get('CONSUMER_KEY')
@@ -19,28 +18,16 @@ api = tweepy.API(auth)
 
 
 @app.route('/randomtweets', methods=['GET'])
-def andy():
+def random_tweets():
     andys = api.get_user(screen_name='andysterks')
-    gtrs = api.get_user(screen_name='JustGTRs')
     bmws = api.get_user(screen_name='BMW')
-    andys_info = api.user_timeline(screen_name='andysterks', count=5)
-    gtrs_info = api.user_timeline(screen_name='JustGTRs', count=5)
-    bmws_info = api.user_timeline(screen_name='BMW', count=5)
+    gtrs = api.get_user(screen_name='JustGTRs')
 
-    andys_tweets_list = []
-    gtrs_tweets_list = []
-    bmws_tweets_list = []
+    andys_info = api.user_timeline(screen_name='andysterks')
+    bmws_info = api.user_timeline(screen_name='BMW')
+    gtrs_info = api.user_timeline(screen_name='JustGTRs')
 
-    for tweets in andys_info:
-        andys_tweets_list.append(tweets.text)
-
-    for tweets in gtrs_info:
-        gtrs_tweets_list.append(tweets.text)
-
-    for tweets in bmws_info:
-        gtrs_tweets_list.append(tweets.text)
-
-    users_info = [{
+    users_info = {
         "name": {
             "andy": andys.name,
             "gtr": gtrs.name,
@@ -51,49 +38,55 @@ def andy():
             "gtrs": gtrs.screen_name,
             "bmws": bmws.screen_name
         },
-        "tweets": [
-            [andys_tweets_list],
-            [gtrs_tweets_list],
-            [bmws_tweets_list]
-        ],
+
         "profile_image": {
             "andys": andys.profile_image_url_https,
             "gtrs": gtrs.profile_image_url_https,
             "bmws": bmws.profile_image_url_https
         }
-    }]
+    }
 
     return jsonify(users_info)
 
 
-# @app.route('/gtr', methods=["GET"])
-# def gtr():
-#     gtrs = api.get_user(screen_name='JustGTRs')
+@app.route('/andy', methods=["GET"])
+def andy_request():
+    andy_get_tweets = api.user_timeline(screen_name="andysterks", count=5)
 
-#     gtrs_info = api.user_timeline(screen_name='JustGTRs', count=5)
+    andys_tweets_list = []
 
-#     gtrs_tweets_list = []
+    for tweets in andy_get_tweets:
+        andys_tweets_list.append(tweets.text)
 
-#     for tweets in gtrs_info:
-#         gtrs_tweets_list.append(tweets.text)
-
-#     user_info = {
-#         "name": gtrs.name,
-#         "tweets": gtrs_tweets_list,
-#         "username": gtrs.screen_name,
-#         "profile_image": gtrs.profile_image_url_https
-#     }
-
-#     return jsonify(user_info)
+    return jsonify({"tweets_list": andys_tweets_list})
 
 
-# @app.route('/bmw', methods=["GET"])
-# def gtr():
-#     return
+@app.route('/bmw', methods=["GET"])
+def bmw_request():
+    bmw_get_tweets = api.user_timeline(screen_name="BMW", count=5)
+
+    bmws_tweets_list = []
+
+    for tweets in bmw_get_tweets:
+        bmws_tweets_list.append(tweets.text)
+
+    return jsonify({"tweets_list": bmws_tweets_list})
 
 
-@app.route('/search/:<name>', methods=['GET'])
-def maybe(name):
-    print(name)
+@app.route('/gtr', methods=["GET"])
+def gtr_request():
+    gtr_get_tweets = api .user_timeline(screen_name="JustGTRs", count=5)
+
+    gtrs_tweets_list = []
+
+    for tweets in gtr_get_tweets:
+        gtrs_tweets_list.append(tweets.text)
+
+    return jsonify({"tweets": gtrs_tweets_list})
+
+
+# @app.route('/search/:<name>', methods=['GET'])
+# def maybe(name):
+#     print(name)
 
     return '{name}'.format(name)
