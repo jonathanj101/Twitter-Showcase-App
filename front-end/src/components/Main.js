@@ -11,7 +11,11 @@ class Main extends Component {
         super();
         this.state = {
             userText: '',
-            user: ''
+            usersInfo: '',
+            andysTweets: '',
+            bmwsTweets: '',
+            gtrsTweets: ''
+
         }
         this.getUserText = this.getUserText.bind(this)
     }
@@ -19,15 +23,43 @@ class Main extends Component {
     getUserText = (text) => {
         console.log(text)
     }
+
     componentDidMount() {
         fetch('/randomtweets')
             .then(response => response.json())
             .then(user => {
                 console.log(user)
                 this.setState({
-                    user: user
+                    usersInfo: user
                 })
-                console.log(this.state.user)
+                console.log(this.state.usersInfo)
+            })
+        fetch('/andy')
+            .then(response => response.json())
+            .then(tweet => {
+                console.log(tweet)
+                this.setState({
+                    andysTweets: tweet
+                })
+                console.log(this.state.andysTweets)
+            })
+        fetch('/bmw')
+            .then(response => response.json())
+            .then(tweet => {
+                console.log(tweet)
+                this.setState({
+                    bmwsTweets: tweet
+                })
+                console.log(this.state.bmwsTweets)
+            })
+        fetch('/gtr')
+            .then(response => response.json())
+            .then(tweet => {
+                console.log(tweet)
+                this.setState({
+                    gtrsTweets: tweet
+                })
+                console.log(this.state.gtrsTweets)
             })
     }
 
@@ -38,7 +70,10 @@ class Main extends Component {
                 <Switch >
                     <Route path="/" exact component={() => <Home />} />
                     <Route path='/search' exact component={() => <SearchComponent getUserText={this.getUserText} />} />
-                    <Route path='/random' exact component={() => <RandomTweetsComponent usersData={this.state.user} />} />
+                    <Route path='/random' exact component={() => <RandomTweetsComponent usersData={this.state.usersInfo}
+                        andyTweets={this.state.andysTweets}
+                        bmwTweets={this.state.bmwsTweets}
+                        gtrTweets={this.state.gtrsTweets} />} />
                 </Switch>
                 <Footer />
             </div >
