@@ -27,8 +27,10 @@ const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) 
                             src={usersData.profile_image.andys}
                             alt="twiiter alike logo"
                             roundedCircle />
-                        <strong className="mr-auto">{usersData.name.andy}</strong>
-                        <small style={userNameStyle}>@{usersData.username.andy}</small>
+                        <div className="mr-auto d-flex flex-column flex-wrap">
+                            <strong >{usersData.name.andy}</strong>
+                            <small >@{usersData.username.andys}</small>
+                        </div>
                         <Button onClick={toggleAndysTweets}>click me</Button>
                     </Toast.Header>
                     <Toast className="w-100" onClose={toggleAndysTweets} show={showAndys}>
@@ -53,8 +55,10 @@ const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) 
                             src={usersData.profile_image.gtrs}
                             alt="twiiter alike logo"
                             roundedCircle />
-                        <strong className="mr-auto">{usersData.name.gtr}</strong>
-                        <small style={userNameStyle}>@{usersData.username.gtrs}</small>
+                        <div className="mr-auto d-flex flex-column flex-wrap">
+                            <strong className="mr-auto">{usersData.name.gtr}</strong>
+                            <small>@{usersData.username.gtrs}</small>
+                        </div>
                         <Button onClick={toggleBMWSTweets}>click me</Button>
                     </Toast.Header>
                     <Toast className="w-100" onClose={toggleBMWSTweets} show={showBMWS}>
@@ -76,8 +80,10 @@ const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) 
                             src={usersData.profile_image.bmws}
                             alt="twiiter alike logo"
                             roundedCircle />
-                        <strong className="mr-auto">{usersData.name.bmw}</strong>
-                        <small style={userNameStyle}>@{usersData.username.bmw}</small>
+                        <div className="mr-auto d-flex flex-column flex-wrap">
+                            <strong className="mr-auto">{usersData.name.bmw}</strong>
+                            <small>@{usersData.username.bmws}</small>
+                        </div>
                         <Button onClick={toggleGTRSTweets}>click me</Button>
                     </Toast.Header>
                     <Toast className="w-100" onClose={toggleGTRSTweets} show={showGTRS}>
@@ -98,12 +104,6 @@ const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) 
 var divHeight = {
     height: '75.25vh',
     minHeight: '75.25vh'
-}
-
-var userNameStyle = {
-    position: "relative",
-    top: "15px",
-    right: "15rem",
 }
 
 export default RandomTweetsComponent
