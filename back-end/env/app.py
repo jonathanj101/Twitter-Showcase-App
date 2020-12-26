@@ -85,8 +85,8 @@ def gtr_request():
     return jsonify({"gtrs_tweets": gtrs_tweets_list})
 
 
-# @app.route('/search/:<name>', methods=['GET'])
-# def maybe(name):
-#     print(name)
+@app.route('/search/<string:name>', methods=['GET'])
+def search_user_request(name):
+    print(name)
 
-    return '{name}'.format(name)
+    return jsonify({"name": name})
