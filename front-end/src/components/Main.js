@@ -10,57 +10,68 @@ class Main extends Component {
     constructor() {
         super();
         this.state = {
-            userText: '',
+            searchText: '',
             usersInfo: '',
-            andysTweets: '',
-            bmwsTweets: '',
-            gtrsTweets: ''
+            andysTweets: [],
+            bmwsTweets: [],
+            gtrsTweets: []
 
         }
         this.getUserText = this.getUserText.bind(this)
     }
 
     getUserText = (text) => {
-        console.log(text)
+        this.setState({
+            searchText: text
+        })
     }
 
     componentDidMount() {
         fetch('/randomtweets')
             .then(response => response.json())
             .then(user => {
-                console.log(user)
+                // console.log(user)
                 this.setState({
                     usersInfo: user
                 })
-                console.log(this.state.usersInfo)
+                // console.log(this.state.usersInfo)
             })
         fetch('/andy')
             .then(response => response.json())
             .then(tweet => {
-                console.log(tweet)
+                // console.log(tweet)
                 this.setState({
-                    andysTweets: tweet
+                    andysTweets: tweet.andys_tweets
                 })
-                console.log(this.state.andysTweets)
+                // console.log(this.state.andysTweets)
             })
         fetch('/bmw')
             .then(response => response.json())
             .then(tweet => {
-                console.log(tweet)
+                // console.log(tweet)
                 this.setState({
-                    bmwsTweets: tweet
+                    bmwsTweets: tweet.bmws_tweets
                 })
-                console.log(this.state.bmwsTweets)
+                // console.log(this.state.bmwsTweets)
             })
         fetch('/gtr')
             .then(response => response.json())
             .then(tweet => {
-                console.log(tweet)
+                // console.log(tweet)
                 this.setState({
-                    gtrsTweets: tweet
+                    gtrsTweets: tweet.gtrs_tweets
                 })
-                console.log(this.state.gtrsTweets)
+                // console.log(this.state.gtrsTweets)
             })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const prevSearchText = this.state.searchText
+        if (this.state.searchText !== prevState.searchText) {
+            fetch(`/search/${prevSearchText}`)
+                .then(response => response.json())
+                .then(userText => console.log(userText))
+        }
     }
 
     render() {
