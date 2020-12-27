@@ -75,7 +75,7 @@ def bmw_request():
 
 @app.route('/gtr', methods=["GET"])
 def gtr_request():
-    gtr_get_tweets = api .user_timeline(screen_name="JustGTRs", count=5)
+    gtr_get_tweets = api.user_timeline(screen_name="JustGTRs", count=5)
 
     gtrs_tweets_list = []
 
@@ -87,6 +87,21 @@ def gtr_request():
 
 @app.route('/search/<string:name>', methods=['GET'])
 def search_user_request(name):
-    print(name)
+    user = api.get_user(screen_name=name)
+    user_tweets = api.user_timeline(screen_name=name, count=5)
 
-    return jsonify({"name": name})
+    searched_user_tweets = []
+
+    for tweets in user_tweets:
+        searched_user_tweets.append(tweets.text)
+
+    user_data = {
+        "name": user.name,
+        "username": user.screen_name,
+        "followers_count": user.followers_count,
+        "following": user.friends_count,
+        "tweets": searched_user_tweets,
+        "profile_image": user.profile_image_url_https
+    }
+
+    return jsonify({'user_info': user_data})
