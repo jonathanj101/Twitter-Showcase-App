@@ -80,7 +80,8 @@ class Main extends Component {
                 <NavbarComponent />
                 <Switch >
                     <Route path="/" exact component={() => <Home />} />
-                    <Route path='/search' exact component={() => <SearchComponent getUserText={this.getUserText} />} />
+                    <Route path='/search' exact component={() => <SearchComponent getUserText={this.getUserText}
+                        searchText={this.state.searchText} />} />
                     <Route path='/random' exact component={() => <RandomTweetsComponent usersData={this.state.usersInfo}
                         andyTweets={this.state.andysTweets}
                         bmwTweets={this.state.bmwsTweets}
