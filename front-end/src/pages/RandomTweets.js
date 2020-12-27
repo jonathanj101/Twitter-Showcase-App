@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
 import { Toast, Button, Image } from 'react-bootstrap'
 
 const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) => {
