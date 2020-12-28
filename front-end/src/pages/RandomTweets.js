@@ -14,7 +14,6 @@ const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) 
     const toggleBMWSTweets = () => setShowBMWS(!showBMWS);
     const toggleGTRSTweets = () => setShowGTRS(!showGTRS);
 
-
     const randomNum = (userTweets) => {
         const randomNum = Math.floor(Math.random() * (userTweets.length))
         return randomNum
