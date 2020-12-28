@@ -7,7 +7,6 @@ const Home = () => {
 
     const toggleShowA = () => setShowA(!showA);
 
-
     return (
         <div
             className='bg-secondary'
