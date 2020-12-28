@@ -74,7 +74,7 @@ const SearchComponent = ({ getUserText, searchText }) => {
                         Random Tweets
                     </Button>
                     <Toast.Body>
-                        idk
+                        Maybe
                     </Toast.Body>
                 </Toast>
             </Card>
