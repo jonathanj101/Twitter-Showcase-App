@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { Button, Card, Image, Toast } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import UserCard from '../components/UserCard'
 
-import redBlue from '../images/red-blue-tweet.jpg'
-
-const SearchComponent = ({ getUserText, searchText }) => {
-    const [showToast, setToast] = useState(false)
+const SearchComponent = ({ getUserText, searchText, searchedUser }) => {
     const [text, getText] = useState('')
 
     function clearState() {
@@ -16,14 +14,6 @@ const SearchComponent = ({ getUserText, searchText }) => {
         console.log(value)
         getText(value)
     }
-
-    function requestForSearch(searchText) {
-        fetch(`/search/${searchText}`)
-            .then(response => response.json())
-            .then(data => console.log(data))
-    }
-
-    const toggleToast = () => setToast(!showToast)
 
     return (
         <div
@@ -37,47 +27,17 @@ const SearchComponent = ({ getUserText, searchText }) => {
                     onChange={getValueInput}
                     placeholder="Search for a user tweet..." />
                 <div className="input-group-append">
-                    <button
+                    <Button
                         onClick={() => {
                             getUserText(text)
                             clearState()
                         }}
                         className="btn btn-outline-secondary bg-primary text-light" type="button">
                         Search
-                    </button>
+                    </Button>
                 </div>
             </div>
-            <Card className='w-25 mx-auto mt-5'>
-                <div className="d-flex flex-row ">
-                    <Image
-                        className='h-50 w-50'
-                        src={redBlue}
-                        roundedCircle />
-                    <div className="d-flex justify-content-center flex-column flex-wrap ml-2">
-                        <strong>name</strong>
-                        <small>username</small>
-                    </div>
-                </div>
-                <div className="d-flex flex-row flex-wrap">
-                    <Card.Text className="ml-5">Following</Card.Text>
-                    <Card.Text className="ml-5">Followers</Card.Text>
-                </div>
-                <Button
-                    variant="primary"
-                    onClick={() => toggleToast()}>
-                    Show Tweets
-                </Button>
-                <Toast
-                    onClose={() => toggleToast()}
-                    show={showToast}>
-                    <Button onClick={() => requestForSearch(searchText)}>
-                        Random Tweets
-                    </Button>
-                    <Toast.Body>
-                        Maybe
-                    </Toast.Body>
-                </Toast>
-            </Card>
+            {searchText !== '' ? <UserCard searchText={searchText} searchedUser={searchedUser} /> : <div></div>}
         </div>
     )
 }
