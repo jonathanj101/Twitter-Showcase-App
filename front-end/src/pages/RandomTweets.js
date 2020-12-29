@@ -10,7 +10,7 @@ const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) 
     const [showBMWS, setShowBMWS] = useState(false);
     const [showGTRS, setShowGTRS] = useState(false);
 
-    const toggleAndysTweets = () => setShowAndys(!showAndys);
+    const toggleAndysTweets = () => setShowAndys(!showAndys)
     const toggleBMWSTweets = () => setShowBMWS(!showBMWS);
     const toggleGTRSTweets = () => setShowGTRS(!showGTRS);
 
@@ -50,7 +50,7 @@ const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) 
                         </div>
                         <Button
                             onClick={toggleAndysTweets}>
-                            click me
+                            Show Tweets
                         </Button>
                     </Toast.Header>
                     <Toast
