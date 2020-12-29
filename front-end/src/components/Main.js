@@ -11,7 +11,7 @@ class Main extends Component {
         super();
         this.state = {
             searchText: '',
-            usersInfo: '',
+            searchedUser: '',
             andysTweets: [],
             bmwsTweets: [],
             gtrsTweets: []
@@ -70,7 +70,12 @@ class Main extends Component {
         if (this.state.searchText !== prevState.searchText) {
             fetch(`/search/${prevSearchText}`)
                 .then(response => response.json())
-                .then(userText => console.log(userText))
+                .then(userSearchedData => {
+                    console.log(userSearchedData)
+                    this.setState({
+                        searchedUser: userSearchedData
+                    })
+                })
         }
     }
 
@@ -81,8 +86,9 @@ class Main extends Component {
                 <Switch >
                     <Route path="/" exact component={() => <Home />} />
                     <Route path='/search' exact component={() => <SearchComponent getUserText={this.getUserText}
-                        searchText={this.state.searchText} />} />
-                    <Route path='/random' exact component={() => <RandomTweetsComponent usersData={this.state.usersInfo}
+                        searchText={this.state.searchText}
+                        searchedUser={this.state.userInfo} />} />
+                    <Route path='/random' exact component={() => <RandomTweetsComponent usersData={this.state.searchedUser}
                         andyTweets={this.state.andysTweets}
                         bmwTweets={this.state.bmwsTweets}
                         gtrTweets={this.state.gtrsTweets} />} />
@@ -92,4 +98,5 @@ class Main extends Component {
         )
     }
 }
+
 export default Main
