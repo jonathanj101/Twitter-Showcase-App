@@ -87,7 +87,7 @@ class Main extends Component {
                     <Route path="/" exact component={() => <Home />} />
                     <Route path='/search' exact component={() => <SearchComponent getUserText={this.getUserText}
                         searchText={this.state.searchText}
-                        searchedUser={this.state.userInfo} />} />
+                        searchedUser={this.state.searchedUser} />} />
                     <Route path='/random' exact component={() => <RandomTweetsComponent usersData={this.state.searchedUser}
                         andyTweets={this.state.andysTweets}
                         bmwTweets={this.state.bmwsTweets}
