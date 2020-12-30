@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Toast, Button, Image } from 'react-bootstrap'
 
 const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) => {
+    console.log(usersData)
     const [andysRandomTweets, andysTweetsFunc] = useState([])
     const [fetchBMWSTweets, bmwsTweetsFunc] = useState([])
     const [fetchGTRSTweets, gtrsTweetsFunc] = useState([])
