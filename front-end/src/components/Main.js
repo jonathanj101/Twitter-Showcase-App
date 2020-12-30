@@ -11,7 +11,13 @@ class Main extends Component {
         super();
         this.state = {
             searchText: '',
-            searchedUser: '',
+            searchedName: '',
+            searchedUserName: '',
+            userProfileImg: '',
+            userFollowersCount: '',
+            userFriendsCount: '',
+            userTweets: [],
+            userData: '',
             andysTweets: [],
             bmwsTweets: [],
             gtrsTweets: []
@@ -27,12 +33,13 @@ class Main extends Component {
     }
 
     componentDidMount() {
+        console.log(this.state.searchedUser, this.state.searchText)
         fetch('/randomtweets')
             .then(response => response.json())
             .then(user => {
-                // console.log(user)
+                console.log(user)
                 this.setState({
-                    usersInfo: user
+                    userData: user
                 })
                 // console.log(this.state.usersInfo)
             })
@@ -73,7 +80,12 @@ class Main extends Component {
                 .then(userSearchedData => {
                     console.log(userSearchedData)
                     this.setState({
-                        searchedUser: userSearchedData
+                        searchedName: userSearchedData.user_info.name,
+                        searchedUserName: userSearchedData.user_info.username,
+                        userFollowersCount: userSearchedData.user_info.followers_count,
+                        userFriendsCount: userSearchedData.user_info.following,
+                        userProfileImg: userSearchedData.user_info.profile_image,
+                        userTweets: userSearchedData.user_info.tweets
                     })
                 })
         }
@@ -87,8 +99,13 @@ class Main extends Component {
                     <Route path="/" exact component={() => <Home />} />
                     <Route path='/search' exact component={() => <SearchComponent getUserText={this.getUserText}
                         searchText={this.state.searchText}
-                        searchedUser={this.state.searchedUser} />} />
-                    <Route path='/random' exact component={() => <RandomTweetsComponent usersData={this.state.searchedUser}
+                        searchedName={this.state.searchedName}
+                        user_name={this.state.searchedUserName}
+                        user_profile_img={this.state.userProfileImg}
+                        user_followers={this.state.userFollowersCount}
+                        user_friends={this.state.userFriendsCount}
+                        user_tweets={this.state.userTweets} />} />
+                    <Route path='/random' exact component={() => <RandomTweetsComponent usersData={this.state.userData}
                         andyTweets={this.state.andysTweets}
                         bmwTweets={this.state.bmwsTweets}
                         gtrTweets={this.state.gtrsTweets} />} />
