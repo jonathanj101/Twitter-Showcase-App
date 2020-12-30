@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import UserCard from '../components/UserCard'
 
-const SearchComponent = ({ getUserText, searchText, searchedUser }) => {
+const SearchComponent = ({ getUserText, searchText, searchedName, user_name, user_profile_img, user_followers, user_friends, user_tweets }) => {
     const [name, setName] = useState('')
     const [username, setUserName] = useState('')
     const [userProfileImg, setUserProfileImg] = useState('')
@@ -21,10 +21,11 @@ const SearchComponent = ({ getUserText, searchText, searchedUser }) => {
         getText(value)
     }
 
+
     function requestForSearch(user) {
         console.log(user)
         if (user !== '') {
-            console.log(user.name)
+            console.log(user)
             // setName(user.name)
             // setUserName(user.username)
             // setUserProfileImg(user.profile_image)
@@ -52,15 +53,15 @@ const SearchComponent = ({ getUserText, searchText, searchedUser }) => {
                     <Button
                         onClick={() => {
                             getUserText(text)
-                            requestForSearch(searchedUser)
-                            clearState()
+                            requestForSearch(searchedName)
+                            // clearState()
                         }}
                         className="btn btn-outline-secondary bg-primary text-light" type="button">
                         Search
                     </Button>
                 </div>
             </div>
-            {searchText !== '' ? <UserCard searchText={searchText} searchedUser={searchedUser} name={name} username={username} userProfileImg={userProfileImg} followersCount={followersCount} friendsCount={friendsCount} userTweets={userTweets} /> : <div></div>}
+            {searchText !== '' ? <UserCard searchText={searchText} name={searchedName} searched_username={user_name} user_profile_img={user_profile_img} user_followers={user_followers} user_friends={user_friends} user_tweets={user_tweets} /> : <div></div>}
 
         </div>
     )
