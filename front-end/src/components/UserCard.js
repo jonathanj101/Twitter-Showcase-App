@@ -2,31 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Image, Toast } from 'react-bootstrap'
 import redBlueImg from '../images/red-blue-tweet.jpg'
 
-const UserCard = ({ searchedUser }) => {
-    console.log(searchedUser)
-    const [name, setName] = useState('')
-    const [username, setUserName] = useState('')
-    const [userProfileImg, setUserProfileImg] = useState('')
-    const [followersCount, setFollowersCount] = useState('')
-    const [friendsCount, setFriendsCount] = useState('')
-    const [userTweets, setUserTweets] = useState([])
+const UserCard = ({ searchedUser, name, username, userProfileImg, followersCount, friendsCount, userTweets }) => {
+    console.log(searchedUser.user_info)
+    console.log(`name > ${name} username > ${username} profile img > ${userProfileImg}, followers count > ${followersCount} friends count > ${friendsCount} tweets > ${userTweets}`)
+
     const [showToast, setToast] = useState(false)
 
     const toggleToast = () => setToast(!showToast)
-
-    function requestForSearch(user) {
-        if (user !== '') {
-            setName(user.name)
-            setUserName(user.username)
-            setUserProfileImg(user.profile_image)
-            setFollowersCount(user.followers_count)
-            setFriendsCount(user.following)
-            setUserTweets(user.tweets)
-        }
-        else {
-            return <div></div>
-        }
-    }
 
     return (
         <div>
@@ -37,7 +19,7 @@ const UserCard = ({ searchedUser }) => {
                         src={userProfileImg}
                         roundedCircle />
                     <div className="d-flex justify-content-center flex-column flex-wrap ml-2">
-                        <strong>{name}</strong>
+                        <strong>{searchedUser.user_info.name}</strong>
                         <small>{username}</small>
                     </div>
                 </div>
@@ -53,7 +35,7 @@ const UserCard = ({ searchedUser }) => {
                 <Toast
                     onClose={() => toggleToast()}
                     show={showToast}>
-                    <Button onClick={() => requestForSearch(searchedUser.user_info)}>
+                    <Button >
                         Random Tweets
                     </Button>
                     <Toast.Body>
@@ -66,3 +48,5 @@ const UserCard = ({ searchedUser }) => {
 }
 
 export default UserCard
+
+// onClick={() => requestForSearch(searchedUser.user_info)}
