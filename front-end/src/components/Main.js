@@ -21,7 +21,6 @@ class Main extends Component {
             andysTweets: [],
             bmwsTweets: [],
             gtrsTweets: []
-
         }
         this.getUserText = this.getUserText.bind(this)
     }
@@ -33,42 +32,36 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        console.log(this.state.searchedUser, this.state.searchText)
         fetch('/randomtweets')
             .then(response => response.json())
             .then(user => {
-                console.log(user)
                 this.setState({
                     userData: user
                 })
-                // console.log(this.state.usersInfo)
             })
+
         fetch('/andy')
             .then(response => response.json())
             .then(tweet => {
-                // console.log(tweet)
                 this.setState({
                     andysTweets: tweet.andys_tweets
                 })
-                // console.log(this.state.andysTweets)
             })
+
         fetch('/bmw')
             .then(response => response.json())
             .then(tweet => {
-                // console.log(tweet)
                 this.setState({
                     bmwsTweets: tweet.bmws_tweets
                 })
-                // console.log(this.state.bmwsTweets)
             })
+
         fetch('/gtr')
             .then(response => response.json())
             .then(tweet => {
-                // console.log(tweet)
                 this.setState({
                     gtrsTweets: tweet.gtrs_tweets
                 })
-                // console.log(this.state.gtrsTweets)
             })
     }
 
@@ -78,7 +71,6 @@ class Main extends Component {
             fetch(`/search/${prevSearchText}`)
                 .then(response => response.json())
                 .then(userSearchedData => {
-                    console.log(userSearchedData)
                     this.setState({
                         searchedName: userSearchedData.user_info.name,
                         searchedUserName: userSearchedData.user_info.username,
