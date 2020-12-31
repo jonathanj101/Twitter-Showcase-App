@@ -3,12 +3,20 @@ import { Button, Card, Image, Toast } from 'react-bootstrap'
 import redBlueImg from '../images/red-blue-tweet.jpg'
 
 const UserCard = ({ name, searched_username, user_profile_img, user_followers, user_friends, user_tweets }) => {
-    console.log(user_followers)
-    // console.log(`name > ${name} username > ${username} profile img > ${userProfileImg}, followers count > ${followersCount} friends count > ${friendsCount} tweets > ${userTweets}`)
-
+    const [tweets, setTweets] = useState()
     const [showToast, setToast] = useState(false)
 
     const toggleToast = () => setToast(!showToast)
+
+    const randomNum = (userTweets) => {
+        const randomNum = Math.floor(Math.random() * (userTweets.length))
+        return randomNum
+    }
+
+    const tweetsData = (tweetInfo) => {
+        const tweetNum = randomNum(tweetInfo)
+        setTweets(tweetInfo[tweetNum])
+    }
 
     return (
         <div>
@@ -33,13 +41,16 @@ const UserCard = ({ name, searched_username, user_profile_img, user_followers, u
                     Show Tweets
                 </Button>
                 <Toast
+                    className="text-center"
                     onClose={() => toggleToast()}
                     show={showToast}>
-                    <Button >
+                    <Button
+                        onClick={() => tweetsData(user_tweets)}
+                        block>
                         Random Tweets
                     </Button>
                     <Toast.Body>
-                        Maybe
+                        {tweets}
                     </Toast.Body>
                 </Toast>
             </Card>
