@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Toast, Button, Image } from 'react-bootstrap'
 
 const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) => {
-    console.log(usersData)
     const [andysRandomTweets, andysTweetsFunc] = useState([])
     const [fetchBMWSTweets, bmwsTweetsFunc] = useState([])
     const [fetchGTRSTweets, gtrsTweetsFunc] = useState([])
@@ -55,12 +54,12 @@ const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) 
                         </Button>
                     </Toast.Header>
                     <Toast
-                        className="w-100"
+                        className="w-100 text-center"
                         onClose={toggleAndysTweets}
                         show={showAndys}>
                         <Button
                             onClick={() => tweetsData(andyTweets)}
-                            className="mx-auto"
+                            block
                         >
                             Random Andy's Tweets
                         </Button>
@@ -86,11 +85,12 @@ const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) 
                         </Button>
                     </Toast.Header>
                     <Toast
-                        className="w-100"
+                        className="w-100 text-center"
                         onClose={toggleBMWSTweets}
                         show={showGTRS}>
                         <Button
                             onClick={() => tweetsData(gtrTweets)}
+                            block
                         >
                             Random GTR's Tweets
                         </Button>
@@ -119,11 +119,12 @@ const RandomTweetsComponent = ({ usersData, andyTweets, bmwTweets, gtrTweets }) 
                         </Button>
                     </Toast.Header>
                     <Toast
-                        className="w-100"
+                        className="w-100 text-center"
                         onClose={toggleBMWSTweets}
                         show={showBMWS}>
                         <Button
                             onClick={() => tweetsData(bmwTweets)}
+                            block
                         >
                             Random BMW's Tweets
                         </Button>
