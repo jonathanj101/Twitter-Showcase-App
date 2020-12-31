@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Card, Image, Toast } from 'react-bootstrap'
-import redBlueImg from '../images/red-blue-tweet.jpg'
 
 const UserCard = ({ name, searched_username, user_profile_img, user_followers, user_friends, user_tweets }) => {
     const [tweets, setTweets] = useState()
