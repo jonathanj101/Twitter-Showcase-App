@@ -22,7 +22,7 @@ const UserCard = ({ name, searched_username, user_profile_img, user_followers, u
             <Card className='card w-25 mx-auto mt-5'>
                 <div className="d-flex flex-row ">
                     <Image
-                        className='h-50 w-50'
+                        className='h-25 w-25'
                         src={user_profile_img}
                         roundedCircle />
                     <div className="d-flex justify-content-center flex-column flex-wrap ml-2">
@@ -58,5 +58,3 @@ const UserCard = ({ name, searched_username, user_profile_img, user_followers, u
 }
 
 export default UserCard
-
-// onClick={() => requestForSearch(searchedUser.user_info)}

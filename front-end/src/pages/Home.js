@@ -28,7 +28,7 @@ const Home = () => {
                             * This application uses Twitter API to search desired user's tweets
                     </Toast.Body>
                         <Toast.Body>
-                            * Click on Search, to search for your favorite person's tweets
+                            * Click on Search, then type in your desire twitter user by their username
                     </Toast.Body>
                         <Toast.Body>
                             * Don't know what to look? Click on Random to see my selected Twitter's users tweets!
@@ -51,6 +51,5 @@ var divHeight = {
 var toastPadding = {
     margin: '10% auto',
 }
-
 
 export default Home

@@ -8,7 +8,6 @@ const NavbarComponent = () => {
         <div>
             <Navbar
                 className="d-flex justify-content-between"
-
                 bg="dark"
                 variant="dark">
                 <Navbar.Brand>

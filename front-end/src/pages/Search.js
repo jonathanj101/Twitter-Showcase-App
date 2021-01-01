@@ -24,7 +24,7 @@ const SearchComponent = ({ getUserText, searchText, searchedName, user_name, use
                     type="text"
                     value={text}
                     onChange={getValueInput}
-                    placeholder="Search for a user tweet..." />
+                    placeholder="Search for a user by typing their username: E.g: nasa..." />
                 <div className="input-group-append">
                     <Button
                         onClick={() => {
