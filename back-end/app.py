@@ -105,3 +105,6 @@ def search_user_request(name):
     }
 
     return jsonify({'user_info': user_data})
+
+if __name__ == "__main__":
+    app.run(port=5000)
