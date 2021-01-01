@@ -1,1 +1,1 @@
-web: gunicorn --chdir back-end server:app
+web: gunicorn -b 127.0.0.1:5000 --chdir /back-end server.wsgi:app
