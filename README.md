@@ -12,7 +12,7 @@
 1. Under `back-end` folder create a file name `.env`
 2. Navigate or open `.env` file and add _exactly_ what the screenshot below has
 
-![](./front-end/src/images/ENV_EXAMPLE.png)
+![](./front-end/src/images/ENV_EXAMPLE1.png)
 
 ## Search
 
