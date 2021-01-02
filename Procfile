@@ -1,1 +1,1 @@
-web: gunicorn -b :5000 --chdir /twitter-showcase-app/back-end/server:app
+web: gunicorn -b :5000 --chdir /twitter-showcase-app/back-end/server.wsgi:app
