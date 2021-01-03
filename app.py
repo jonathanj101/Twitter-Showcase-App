@@ -2,8 +2,6 @@ import os
 import tweepy
 import json
 from flask import Flask, jsonify
-from dotenv import load_dotenv
-load_dotenv()
 
 app = Flask(__name__)
 
