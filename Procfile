@@ -1,1 +1,1 @@
-web: npm start
+web: --chdir front-end npm start
