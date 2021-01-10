@@ -5,12 +5,26 @@
 
 # Instructions
 
-![Want to search your Twitter?]()
+![Want to search your Twitter?](https://twitter-tweet-tag.herokuapp.com/search)
 
-##### In order for this repository to work properly, if ever clone or download, please follow these steps below
+![](./front-end/src/images/preview.png)
 
-1. Under `back-end` folder create a file name `.env`
-2. Navigate or open `.env` file and add _exactly_ what the screenshot below has
+## In order for this repository to work properly, if ever clone or download, please follow these steps below
+
+1. Under the project root directoy, create a `back-end` folder
+2. Make sure you have Python downloaded on your computer:
+
+- Open your CMD (Command Prompt) or git bash(if downloaded already)
+- Navigate to `back-end` and download require package listing below using Python Package Manager `pip`
+  - [Tweepy](http://docs.tweepy.org/en/latest/install.html)
+  - [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/#install-flask)
+
+3. Move `app.py` to `back-end` directory
+   - under `app.py` line 6 change from `static_folder='./front-end/build/` to `static_folder='../front-end/build/`
+4. Then under `back-end` directory create a file name `.env` **Dont't forget the dot (.)**
+5. Before getting to the next step:
+   - Make sure to have a [Developer-Twitter-account](https://developer.twitter.com/en/docs) if not already then create one in order to generate your API Keys needed for this project to function correctly
+6. Navigate or open `.env` file and add _exactly_ what the screenshot below has
 
 ![](./front-end/src/images/ENV_EXAMPLE1.png)
 
