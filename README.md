@@ -3,11 +3,16 @@
 - This application searches the desire twitter user and showcase their tweet!
 - This project's Client side was built entirely in React.js, it's Server side was built using Python/Flask and [Twitter API](https://developer.twitter.com/en/products/twitter-api)
 
-# Instructions
-
 [Want to search your Twitter?](https://twitter-tweet-tag.herokuapp.com/search)
 
 ![](./front-end/src/images/preview.png)
+
+# Instructions
+
+## Search
+
+1. Navigate to Search
+2. Type in the username of the desire Twitter's user. E.g: nasa or bmw
 
 ## In order for this repository to work properly, if ever clone or download, please follow these steps below
 
@@ -27,11 +32,6 @@
 6. Navigate or open `.env` file and add _exactly_ what the screenshot below has
 
 ![](./front-end/src/images/ENV_EXAMPLE1.png)
-
-## Search
-
-1. Navigate to Search
-2. Type in the username of the desire Twitter's user. E.g: nasa or bmw
 
 # Summary
 
