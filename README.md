@@ -5,7 +5,7 @@
 
 # Instructions
 
-![Want to search your Twitter?](https://twitter-tweet-tag.herokuapp.com/search)
+[Want to search your Twitter?](https://twitter-tweet-tag.herokuapp.com/search)
 
 ![](./front-end/src/images/preview.png)
 
