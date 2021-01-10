@@ -48,7 +48,6 @@ const SearchComponent = ({ getUserText, searchText, searchedName, user_name, use
                     user_tweets={user_tweets} />
                 :
                 <div></div>}
-
         </div>
     )
 }
