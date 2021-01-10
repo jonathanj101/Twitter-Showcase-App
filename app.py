@@ -3,7 +3,7 @@ import tweepy
 import json
 from flask import Flask, jsonify
 
-app = Flask(__name__, static_folder='./front-end/build/', static_url_path='/')
+app = Flask(__name__, static_folder='../front-end/build/', static_url_path='/')
 
 consumer_key = os.environ.get('CONSUMER_KEY')
 consumer_token = os.environ.get('CONSUMER_SECRET')
@@ -116,6 +116,5 @@ def search_user_request(name):
 
 
 if __name__ == "__main__":
-    # app.run(host='0.0.0.0', debug=False, port=5000)
-    app.run(host='0.0.0.0', debug=False,
+    app.run(host='0.0.0.0',
             port=int(os.environ.get("PORT", 5000)))
