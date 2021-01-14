@@ -1,18 +1,32 @@
 import os
 import tweepy
 import json
-from flask import Flask, jsonify
+import requests
+from flask import Flask, jsonify, request
 
-app = Flask(__name__, static_folder='./front-end/build/', static_url_path='/')
+app = Flask(__name__, static_folder='../front-end/build/', static_url_path='/')
 
 consumer_key = os.environ.get('CONSUMER_KEY')
-consumer_token = os.environ.get('CONSUMER_SECRET')
+consumer_secret = os.environ.get('CONSUMER_SECRET')
 access_token_key = os.environ.get('ACCESS_TOKEN')
 access_token_key_secret = os.environ.get('ACCESS_TOKEN_SECRET')
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_token)
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token_key, access_token_key_secret)
 api = tweepy.API(auth)
+
+headers = {
+    'authorization': 'Basic',
+    'oauth_consumer_key': consumer_key,
+    'oauth_consumer_secret': consumer_secret,
+    'oauth_token': access_token_key,
+    'oauth_token_secret': access_token_key_secret,
+    'grant_type': 'client_credentials'
+}
+
+req = requests.post(
+    'https://api.twitter.com/oauth2/token', headers=headers)
+print(req)
 
 
 @app.route('/', methods=['GET'])
@@ -95,6 +109,7 @@ def gtr_request():
 
 @app.route('/search/<string:name>', methods=['GET'])
 def search_user_request(name):
+
     user = api.get_user(screen_name=name)
     user_tweets = api.user_timeline(screen_name=name, count=5)
 
