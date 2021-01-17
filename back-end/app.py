@@ -2,6 +2,8 @@ import os
 import tweepy
 import json
 import requests
+import base64
+from requests_oauthlib import OAuth1
 from flask import Flask, jsonify, request
 
 app = Flask(__name__, static_folder='../front-end/build/', static_url_path='/')
@@ -11,22 +13,28 @@ consumer_secret = os.environ.get('CONSUMER_SECRET')
 access_token_key = os.environ.get('ACCESS_TOKEN')
 access_token_key_secret = os.environ.get('ACCESS_TOKEN_SECRET')
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token_key, access_token_key_secret)
-api = tweepy.API(auth)
+auth1 = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth1.set_access_token(access_token_key, access_token_key_secret)
+api = tweepy.API(auth1)
 
-headers = {
-    'authorization': 'Basic',
-    'oauth_consumer_key': consumer_key,
-    'oauth_consumer_secret': consumer_secret,
-    'oauth_token': access_token_key,
-    'oauth_token_secret': access_token_key_secret,
-    'grant_type': 'client_credentials'
+url = 'https://api.twitter.com/oauth2/token'
+
+key_secret = '{}:{}'.format(consumer_key, consumer_secret).encode('ascii')
+b64_encoded_key = base64.b64encode(key_secret)
+b64_encoded_key = b64_encoded_key.decode('ascii')
+
+auth_headers = {
+    'Authorization': 'Basic {}'.format(b64_encoded_key),
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
 }
 
-req = requests.post(
-    'https://api.twitter.com/oauth2/token', headers=headers)
-print(req)
+auth_data = {
+    'grant_type': 'client_credentials'
+
+}
+
+req = requests.post(url, headers=auth_headers, data=auth_data)
+print(req.headers, 'ok')
 
 
 @app.route('/', methods=['GET'])
