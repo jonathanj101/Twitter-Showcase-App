@@ -17,7 +17,9 @@ auth1 = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth1.set_access_token(access_token_key, access_token_key_secret)
 api = tweepy.API(auth1)
 
-url = 'https://api.twitter.com/oauth2/token'
+base_url = "https://api.twitter.com/"
+oauth_url = 'https://api.twitter.com/oauth2/token'
+
 
 key_secret = '{}:{}'.format(consumer_key, consumer_secret).encode('ascii')
 b64_encoded_key = base64.b64encode(key_secret)
@@ -30,11 +32,14 @@ auth_headers = {
 
 auth_data = {
     'grant_type': 'client_credentials'
-
 }
 
-req = requests.post(url, headers=auth_headers, data=auth_data)
-print(req.headers, 'ok')
+req = requests.post(oauth_url, headers=auth_headers, data=auth_data)
+bearer_token = req.json()['access_token']
+
+SEARCH_HEADER = {
+    "Authorization": "Bearer {}".format(bearer_token)
+}
 
 
 @app.route('/', methods=['GET'])
@@ -49,30 +54,52 @@ def not_found(e):
 
 @app.route('/randomtweets', methods=['GET'])
 def random_tweets():
-    andys = api.get_user(screen_name='andysterks')
-    bmws = api.get_user(screen_name='BMW')
-    gtrs = api.get_user(screen_name='JustGTRs')
 
-    andys_info = api.user_timeline(screen_name='andysterks')
-    bmws_info = api.user_timeline(screen_name='BMW')
-    gtrs_info = api.user_timeline(screen_name='JustGTRs')
+    andy_params = {
+        'screen_name': 'andysterks',
+        'count': '10'
+    }
+
+    bmw_params = {
+        'screen_name': 'BMW',
+        'count': '10'
+    }
+
+    gtr_params = {
+        'screen_name': 'JustGTRs',
+        'count': '10'
+    }
+
+    search_url = "{}1.1/users/show.json".format(
+        base_url)
+
+    andy_req_resp = requests.get(
+        search_url, headers=SEARCH_HEADER, params='screen_name={}'.format(andy_params['screen_name']))
+    bmw_req_resp = requests.get(
+        search_url, headers=SEARCH_HEADER, params='screen_name={}'.format(bmw_params['screen_name']))
+    gtr_req_resp = requests.get(
+        search_url, headers=SEARCH_HEADER, params='screen_name={}'.format(gtr_params['screen_name']))
+
+    andy_resp_jsonified = andy_req_resp.json()
+    bmw_resp_jsonified = bmw_req_resp.json()
+    gtr_resp_jsonified = gtr_req_resp.json()
 
     users_info = {
         "name": {
-            "andy": andys.name,
-            "gtr": gtrs.name,
-            "bmw": bmws.name
+            "andy": andy_resp_jsonified['name'],
+            "gtr": gtr_resp_jsonified['name'],
+            "bmw": bmw_resp_jsonified['name'],
         },
         "username": {
-            "andys": andys.screen_name,
-            "gtrs": gtrs.screen_name,
-            "bmws": bmws.screen_name
+            "andys": andy_resp_jsonified['screen_name'],
+            "gtrs": gtr_resp_jsonified['screen_name'],
+            "bmws": bmw_resp_jsonified['screen_name'],
         },
 
         "profile_image": {
-            "andys": andys.profile_image_url_https,
-            "gtrs": gtrs.profile_image_url_https,
-            "bmws": bmws.profile_image_url_https
+            "andys": andy_resp_jsonified['profile_image_url_https'],
+            "gtrs": gtr_resp_jsonified['profile_image_url_https'],
+            "bmws": bmw_resp_jsonified['profile_image_url_https'],
         }
     }
 
