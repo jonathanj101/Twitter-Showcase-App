@@ -41,6 +41,21 @@ SEARCH_HEADER = {
     "Authorization": "Bearer {}".format(bearer_token)
 }
 
+andy_params = {
+    'screen_name': 'andysterks',
+    'count': '10'
+}
+
+bmw_params = {
+    'screen_name': 'BMW',
+    'count': '10'
+}
+
+gtr_params = {
+    'screen_name': 'JustGTRs',
+    'count': '10'
+}
+
 
 @app.route('/', methods=['GET'])
 def home():
@@ -54,21 +69,6 @@ def not_found(e):
 
 @app.route('/randomtweets', methods=['GET'])
 def random_tweets():
-
-    andy_params = {
-        'screen_name': 'andysterks',
-        'count': '10'
-    }
-
-    bmw_params = {
-        'screen_name': 'BMW',
-        'count': '10'
-    }
-
-    gtr_params = {
-        'screen_name': 'JustGTRs',
-        'count': '10'
-    }
 
     search_url = "{}1.1/users/show.json".format(
         base_url)
@@ -109,18 +109,28 @@ def random_tweets():
 @app.route('/andy', methods=["GET"])
 def andy_request():
     andy_get_tweets = api.user_timeline(screen_name="andysterks", count=5)
+    search_user_url = '{}1.1/statuses/user_timeline.json'.format(base_url)
 
-    andys_tweets_list = []
+    andy_get_req = requests.get(
+        search_user_url, headers=SEARCH_HEADER, params=andy_params)
 
-    for tweets in andy_get_tweets:
-        andys_tweets_list.append(tweets.text)
+    andy_resp_jsonified = andy_get_req.json()
 
-    return jsonify({"andys_tweets": andys_tweets_list})
+    tweets = []
+
+    for tweet in andy_resp_jsonified:
+        tweets.append(tweet['text'])
+
+    return jsonify({"andys_tweets": tweets})
 
 
 @app.route('/bmw', methods=["GET"])
 def bmw_request():
     bmw_get_tweets = api.user_timeline(screen_name="BMW", count=5)
+    search_user_url = '{}1.1/statuses/user_timeline.json'.format(base_url)
+
+    bmw_get_req = requests.get(
+        search_user_url, headers=SEARCH_HEADER, params=bmw_params)
 
     bmws_tweets_list = []
 
@@ -133,6 +143,11 @@ def bmw_request():
 @app.route('/gtr', methods=["GET"])
 def gtr_request():
     gtr_get_tweets = api.user_timeline(screen_name="JustGTRs", count=5)
+    search_user_url = '{}1.1/statuses/user_timeline.json'.format(base_url)
+
+    gtr_get_req = requests.get(
+        search_user_url, headers=SEARCH_HEADER, params=gtr_params)
+    print(gtr_get_req.url)
 
     gtrs_tweets_list = []
 
