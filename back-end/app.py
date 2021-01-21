@@ -165,19 +165,18 @@ def gtr_request():
 @app.route('/search/<string:name>', methods=['GET'])
 def search_user_request(name):
     user_info = {
-        'screen_name': name,
-        'count': '10'
+        'q': name,
+        'count': '1'
     }
     print(user_info)
-    search_url = '{}1.1/statuses/user_timeline.json'.format(base_url)
+    search_url = '{}1.1/search/tweets.json'.format(base_url)
 
     search_user_req = requests.get(
         search_url, headers=SEARCH_HEADER, params=user_info)
 
     resp_jsonified = search_user_req.json()
     print('url {}'.format(search_user_req.url))
-    print('headers {}'.format(search_user_req.headers))
-    print(search_user_req)
+    print('resp {}'.format(resp_jsonified))
 
     # user = api.get_user(screen_name=name)
     # user_tweets = api.user_timeline(screen_name=name, count=5)
