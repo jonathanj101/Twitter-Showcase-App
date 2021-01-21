@@ -41,6 +41,8 @@ SEARCH_HEADER = {
     "Authorization": "Bearer {}".format(bearer_token)
 }
 
+print(SEARCH_HEADER)
+
 andy_params = {
     'screen_name': 'andysterks',
     'count': '10'
@@ -114,14 +116,14 @@ def andy_request():
     andy_get_req = requests.get(
         search_user_url, headers=SEARCH_HEADER, params=andy_params)
 
-    andy_resp_jsonified = andy_get_req.json()
+    resp_jsonified = andy_get_req.json()
 
-    tweets = []
+    tweets_list = []
 
-    for tweet in andy_resp_jsonified:
-        tweets.append(tweet['text'])
+    for tweets in resp_jsonified:
+        tweets_list.append(tweets['text'])
 
-    return jsonify({"andys_tweets": tweets})
+    return jsonify({"andys_tweets": tweets_list})
 
 
 @app.route('/bmw', methods=["GET"])
@@ -132,12 +134,14 @@ def bmw_request():
     bmw_get_req = requests.get(
         search_user_url, headers=SEARCH_HEADER, params=bmw_params)
 
-    bmws_tweets_list = []
+    resp_jsonified = bmw_get_req.json()
 
-    for tweets in bmw_get_tweets:
-        bmws_tweets_list.append(tweets.text)
+    tweets_list = []
 
-    return jsonify({"bmws_tweets": bmws_tweets_list})
+    for tweets in resp_jsonified:
+        tweets_list.append(tweets['text'])
+
+    return jsonify({"bmws_tweets": tweets_list})
 
 
 @app.route('/gtr', methods=["GET"])
@@ -147,37 +151,53 @@ def gtr_request():
 
     gtr_get_req = requests.get(
         search_user_url, headers=SEARCH_HEADER, params=gtr_params)
-    print(gtr_get_req.url)
 
-    gtrs_tweets_list = []
+    resp_jsonified = gtr_get_req.json()
 
-    for tweets in gtr_get_tweets:
-        gtrs_tweets_list.append(tweets.text)
+    tweets_list = []
 
-    return jsonify({"gtrs_tweets": gtrs_tweets_list})
+    for tweets in resp_jsonified:
+        tweets_list.append(tweets['text'])
+
+    return jsonify({"gtrs_tweets": tweets_list})
 
 
 @app.route('/search/<string:name>', methods=['GET'])
 def search_user_request(name):
-
-    user = api.get_user(screen_name=name)
-    user_tweets = api.user_timeline(screen_name=name, count=5)
-
-    searched_user_tweets = []
-
-    for tweets in user_tweets:
-        searched_user_tweets.append(tweets.text)
-
-    user_data = {
-        "name": user.name,
-        "username": user.screen_name,
-        "followers_count": user.followers_count,
-        "following": user.friends_count,
-        "tweets": searched_user_tweets,
-        "profile_image": user.profile_image_url_https
+    user_info = {
+        'screen_name': name,
+        'count': '10'
     }
+    print(user_info)
+    search_url = '{}1.1/statuses/user_timeline.json'.format(base_url)
 
-    return jsonify({'user_info': user_data})
+    search_user_req = requests.get(
+        search_url, headers=SEARCH_HEADER, params=user_info)
+
+    resp_jsonified = search_user_req.json()
+    print('url {}'.format(search_user_req.url))
+    print('headers {}'.format(search_user_req.headers))
+    print(search_user_req)
+
+    # user = api.get_user(screen_name=name)
+    # user_tweets = api.user_timeline(screen_name=name, count=5)
+
+    # searched_user_tweets = []
+
+    # for tweets in user_tweets:
+    #     searched_user_tweets.append(tweets.text)
+
+    # user_data = {
+    #     "name": user.name,
+    #     "username": user.screen_name,
+    #     "followers_count": user.followers_count,
+    #     "following": user.friends_count,
+    #     "tweets": searched_user_tweets,
+    #     "profile_image": user.profile_image_url_https
+    # }
+
+    # return jsonify({'user_info': user_data})
+    return 'ok'
 
 
 if __name__ == "__main__":
