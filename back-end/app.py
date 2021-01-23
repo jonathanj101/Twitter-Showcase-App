@@ -1,9 +1,7 @@
 import os
-import tweepy
 import json
 import requests
 import base64
-from requests_oauthlib import OAuth1
 from flask import Flask, jsonify, request
 
 app = Flask(__name__, static_folder='../front-end/build/', static_url_path='/')
@@ -12,10 +10,6 @@ consumer_key = os.environ.get('CONSUMER_KEY')
 consumer_secret = os.environ.get('CONSUMER_SECRET')
 access_token_key = os.environ.get('ACCESS_TOKEN')
 access_token_key_secret = os.environ.get('ACCESS_TOKEN_SECRET')
-
-auth1 = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth1.set_access_token(access_token_key, access_token_key_secret)
-api = tweepy.API(auth1)
 
 base_url = "https://api.twitter.com/"
 oauth_url = 'https://api.twitter.com/oauth2/token'
@@ -40,8 +34,6 @@ bearer_token = req.json()['access_token']
 SEARCH_HEADER = {
     "Authorization": "Bearer {}".format(bearer_token)
 }
-
-print(SEARCH_HEADER)
 
 andy_params = {
     'screen_name': 'andysterks',
@@ -110,7 +102,6 @@ def random_tweets():
 
 @app.route('/andy', methods=["GET"])
 def andy_request():
-    andy_get_tweets = api.user_timeline(screen_name="andysterks", count=5)
     search_user_url = '{}1.1/statuses/user_timeline.json'.format(base_url)
 
     andy_get_req = requests.get(
@@ -128,7 +119,6 @@ def andy_request():
 
 @app.route('/bmw', methods=["GET"])
 def bmw_request():
-    bmw_get_tweets = api.user_timeline(screen_name="BMW", count=5)
     search_user_url = '{}1.1/statuses/user_timeline.json'.format(base_url)
 
     bmw_get_req = requests.get(
@@ -146,7 +136,6 @@ def bmw_request():
 
 @app.route('/gtr', methods=["GET"])
 def gtr_request():
-    gtr_get_tweets = api.user_timeline(screen_name="JustGTRs", count=5)
     search_user_url = '{}1.1/statuses/user_timeline.json'.format(base_url)
 
     gtr_get_req = requests.get(
@@ -165,38 +154,42 @@ def gtr_request():
 @app.route('/search/<string:name>', methods=['GET'])
 def search_user_request(name):
     user_info = {
-        'q': name,
-        'count': '1'
+        'screen_name': name,
+        'count': '5'
     }
-    print(user_info)
-    search_url = '{}1.1/search/tweets.json'.format(base_url)
+
+    search_url = '{}1.1/statuses/user_timeline.json'.format(base_url)
 
     search_user_req = requests.get(
         search_url, headers=SEARCH_HEADER, params=user_info)
 
-    resp_jsonified = search_user_req.json()
-    print('url {}'.format(search_user_req.url))
-    print('resp {}'.format(resp_jsonified))
+    searched_user_tweets = []
 
-    # user = api.get_user(screen_name=name)
-    # user_tweets = api.user_timeline(screen_name=name, count=5)
+    if (search_user_req.status_code == 401):
 
-    # searched_user_tweets = []
+        user_not_found = {
+            'name': 'user name not found',
+            'username': 'user username not found',
+            'text': 'It might be that you have a typo or not typing the username correctly'
+        }
+        return jsonify({'user_not_found': user_not_found})
 
-    # for tweets in user_tweets:
-    #     searched_user_tweets.append(tweets.text)
+    else:
+        resp_jsonified = search_user_req.json()
 
-    # user_data = {
-    #     "name": user.name,
-    #     "username": user.screen_name,
-    #     "followers_count": user.followers_count,
-    #     "following": user.friends_count,
-    #     "tweets": searched_user_tweets,
-    #     "profile_image": user.profile_image_url_https
-    # }
+        for tweets in resp_jsonified:
+            searched_user_tweets.append(tweets['text'])
 
-    # return jsonify({'user_info': user_data})
-    return 'ok'
+        user_data = {
+            "name": resp_jsonified[0]['user']['name'],
+            "username": resp_jsonified[0]['user']['screen_name'],
+            "followers_count": resp_jsonified[0]['user']['followers_count'],
+            "following": resp_jsonified[0]['user']['friends_count'],
+            "tweets": searched_user_tweets,
+            "profile_image": resp_jsonified[0]['user']['profile_image_url_https']
+        }
+
+        return jsonify({'user_info': user_data})
 
 
 if __name__ == "__main__":
