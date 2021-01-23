@@ -1,9 +1,22 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import UserCard from '../components/UserCard'
+import Error401 from '../components/Error401'
 
-const SearchComponent = ({ getUserText, searchText, searchedName, user_name, user_profile_img, user_followers, user_friends, user_tweets }) => {
+const SearchComponent = ({
+    getUserText,
+    searchText,
+    searchedName,
+    user_name,
+    user_profile_img,
+    user_followers,
+    user_friends,
+    user_tweets,
+    is401,
+    is401ErrMsg }) => {
+
     const [text, getText] = useState('')
+
 
     function clearState() {
         getText("")
@@ -45,7 +58,9 @@ const SearchComponent = ({ getUserText, searchText, searchedName, user_name, use
                     user_profile_img={user_profile_img}
                     user_followers={user_followers}
                     user_friends={user_friends}
-                    user_tweets={user_tweets} />
+                    user_tweets={user_tweets}
+                    is401Var={is401}
+                    errMsg={is401ErrMsg} />
                 :
                 <div></div>}
         </div>
