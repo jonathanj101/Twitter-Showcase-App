@@ -4,7 +4,7 @@ import requests
 import base64
 from flask import Flask, jsonify, request
 
-app = Flask(__name__, static_folder='../front-end/build/', static_url_path='/')
+app = Flask(__name__, static_folder='./front-end/build/', static_url_path='/')
 
 consumer_key = os.environ.get('CONSUMER_KEY')
 consumer_secret = os.environ.get('CONSUMER_SECRET')
