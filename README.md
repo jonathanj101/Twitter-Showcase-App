@@ -20,8 +20,9 @@
 2. Make sure you have Python downloaded on your computer:
 
 - Open your CMD (Command Prompt) or git bash(if downloaded already)
-- Navigate to `back-end` and download require package listing below using Python Package Manager `pip`
-  - [Tweepy](http://docs.tweepy.org/en/latest/install.html)
+- Navigate to `back-end` and download the require packages listing below using Python Package Manager `pip`
+  - [python-dotenv](https://pypi.org/project/python-dotenv/)
+  - [requests](https://requests.readthedocs.io/en/latest/user/install/#install)
   - [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/#install-flask)
 
 3. Move `app.py` to `back-end` directory
@@ -35,7 +36,7 @@
 
 # Summary
 
-My first full fledge Full Stack project, i could say i enjoyed and had fun while building it's client-side and server side. With challenges i never faced before such as creating a connection between React.js and internal API Flask then from internal API Flask to external API, in this case [Twitter API](https://developer.twitter.com/en/products/twitter-api). Thus, navigating Twiiter Api website, creating a developer account in order to have access or be authorized to use their API. Furthermore, testing their endpoints on Postman to simulate what i'm suppose to do in my server then handling those data appropriately to send back to React.js and therefore display it to the user. However, with every error i encountered, i learn a valuable a lesson, errors could be consider as a step closer to perfection.
+My first full fledge Full Stack project, i could say i enjoyed and had fun while building it's client-side and server side. With challenges i never faced before such as creating a connection between React.js and internal API Flask then from internal API Flask to external API, in this case [Twitter API](https://developer.twitter.com/en/products/twitter-api). Thus, navigating Twiiter Api website, creating a developer account in order to have access or be authorized to use their API. Furthermore, testing their endpoints on Postman to simulate what i'm suppose to do in my server then handling those data appropriately to send back to React.js and therefore display it to the user. Moveover, as i was deploying app to Heroku, more errors to handle and a lot of configuring to guide Heroku on properly build and find the right static files to display to user. In conclusion, with every error i encountered, i learned a valuable a lesson, errors could be consider as a step closer to perfection.
 
 # Author
 
