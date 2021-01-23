@@ -17,6 +17,8 @@ class Main extends Component {
             userFollowersCount: '',
             userFriendsCount: '',
             userTweets: [],
+            is401: false,
+            is401Msg: '',
             userData: '',
             andysTweets: [],
             bmwsTweets: [],
@@ -71,14 +73,26 @@ class Main extends Component {
             fetch(`/search/${prevSearchText}`)
                 .then(response => response.json())
                 .then(userSearchedData => {
-                    this.setState({
-                        searchedName: userSearchedData.user_info.name,
-                        searchedUserName: userSearchedData.user_info.username,
-                        userFollowersCount: userSearchedData.user_info.followers_count,
-                        userFriendsCount: userSearchedData.user_info.following,
-                        userProfileImg: userSearchedData.user_info.profile_image,
-                        userTweets: userSearchedData.user_info.tweets
-                    })
+                    if (userSearchedData.user_not_found) {
+                        console.log(userSearchedData.user_not_found.name)
+                        this.setState({
+                            is401: true,
+                            searchedName: userSearchedData.user_not_found.name,
+                            searchedUserName: userSearchedData.user_not_found.username,
+                            is401Msg: userSearchedData.user_not_found.text,
+                            userFollowersCount: '0',
+                            userFriendsCount: '0',
+                        })
+                    } else {
+                        this.setState({
+                            searchedName: userSearchedData.user_info.name,
+                            searchedUserName: userSearchedData.user_info.username,
+                            userFollowersCount: userSearchedData.user_info.followers_count,
+                            userFriendsCount: userSearchedData.user_info.following,
+                            userProfileImg: userSearchedData.user_info.profile_image,
+                            userTweets: userSearchedData.user_info.tweets
+                        })
+                    }
                 })
         }
     }
@@ -96,7 +110,10 @@ class Main extends Component {
                         user_profile_img={this.state.userProfileImg}
                         user_followers={this.state.userFollowersCount}
                         user_friends={this.state.userFriendsCount}
-                        user_tweets={this.state.userTweets} />} />
+                        user_tweets={this.state.userTweets}
+                        is401={this.state.is401}
+                        is401ErrMsg={this.state.is401Msg}
+                    />} />
                     <Route path='/random' exact component={() => <RandomTweetsComponent usersData={this.state.userData}
                         andyTweets={this.state.andysTweets}
                         bmwTweets={this.state.bmwsTweets}
