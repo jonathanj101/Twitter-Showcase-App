@@ -2,7 +2,7 @@ import os
 import json
 import requests
 import base64
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 
 app = Flask(__name__, static_folder='./front-end/build/', static_url_path='/')
 
