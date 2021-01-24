@@ -10,6 +10,7 @@ consumer_key = os.environ.get('CONSUMER_KEY')
 consumer_secret = os.environ.get('CONSUMER_SECRET')
 access_token_key = os.environ.get('ACCESS_TOKEN')
 access_token_key_secret = os.environ.get('ACCESS_TOKEN_SECRET')
+bearer_token = os.environ.get('BEARER_TOKEN')
 
 base_url = "https://api.twitter.com/"
 oauth_url = 'https://api.twitter.com/oauth2/token'
@@ -20,7 +21,7 @@ b64_encoded_key = base64.b64encode(key_secret)
 b64_encoded_key = b64_encoded_key.decode('ascii')
 
 auth_headers = {
-    'Authorization': 'Basic {}'.format(b64_encoded_key),
+    'Authorization': 'Basic {}'.format(bearer_token),
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
 }
 
@@ -29,7 +30,6 @@ auth_data = {
 }
 
 req = requests.post(oauth_url, headers=auth_headers, data=auth_data)
-bearer_token = req.json()['access_token']
 
 SEARCH_HEADER = {
     "Authorization": "Bearer {}".format(bearer_token)
