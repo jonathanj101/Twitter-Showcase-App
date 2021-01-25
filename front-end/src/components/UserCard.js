@@ -65,7 +65,7 @@ const UserCard = ({
                     </Toast>
                 </Card>
                 :
-                <Error401 errorMsg={errMsg} />}
+                <Error401 errorMesg={errMsg} />}
         </div >
     )
 }

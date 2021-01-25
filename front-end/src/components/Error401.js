@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Image } from 'react-bootstrap'
 import userNotFoundImg from '../images/user-not-found.jpg'
 
-const Error401 = ({ errorMsg }) => {
+const Error401 = ({ errorMsg: errorMesg }) => {
     return (
         <div>
             <Card className="card w-25 mx-auto mt-5">
@@ -17,7 +17,7 @@ const Error401 = ({ errorMsg }) => {
                     </div>
                 </div>
                 <Card.Text className="">
-                    {errorMsg}
+                    {errorMesg}
                 </Card.Text>
             </Card>
         </div>
