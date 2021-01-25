@@ -25,7 +25,6 @@ const UserCard = ({
         const tweetNum = randomNum(tweetInfo)
         setTweets(tweetInfo[tweetNum])
     }
-    console.log(is401Var)
 
     return (
         <div>
