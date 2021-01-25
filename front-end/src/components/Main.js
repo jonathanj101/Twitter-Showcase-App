@@ -74,7 +74,6 @@ class Main extends Component {
                 .then(response => response.json())
                 .then(userSearchedData => {
                     if (userSearchedData.user_not_found) {
-                        console.log(userSearchedData.user_not_found.name)
                         this.setState({
                             is401: true,
                             searchedName: userSearchedData.user_not_found.name,
@@ -85,6 +84,7 @@ class Main extends Component {
                         })
                     } else {
                         this.setState({
+                            is401: false,
                             searchedName: userSearchedData.user_info.name,
                             searchedUserName: userSearchedData.user_info.username,
                             userFollowersCount: userSearchedData.user_info.followers_count,
